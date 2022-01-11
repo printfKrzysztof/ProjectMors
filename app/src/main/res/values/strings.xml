@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Project Mors</string>
+    <string name="Certyfikat">Project Mors 2021 - wszelkie prawa zastrzeżone</string>
+    <string name="Zdanie">Tekst</string>
+    <string name="kod">Kod Morsa</string>
+    <string name="TekstPl">Tu wpisz swoje zdanie</string>
+    <string name="Mors">Tu wpisuj kod Morsa</string>
 </resources>
