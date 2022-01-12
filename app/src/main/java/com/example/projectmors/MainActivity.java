@@ -65,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
+                String wpisane = mors.getText().toString();
+                String przetlumaczenie = tlumaczeniewdrugostrone(wpisane);
+                tekst.setText(przetlumaczenie);
 
             }
         });
@@ -73,12 +76,22 @@ public class MainActivity extends AppCompatActivity {
 
     public void OnClick(View adoz)
     {
+        //Pobierasz tekst i na lampkę
         //String kodmorsa = mors.getText().toString();
         createNewDialog();
+
     }
 
     /* Funkacja odpowiedzialna za tlumaczenie*/
     public String tlumaczenie(String wpisane)
+    {
+        //Toast chmurka;
+        //chmurka = Toast.makeText(this,"Wprowadzono złe dane",Toast.LENGTH_LONG);
+        //chmurka.show();
+        return wpisane;
+    }
+
+    public String tlumaczeniewdrugostrone(String wpisane)
     {
         //Toast chmurka;
         //chmurka = Toast.makeText(this,"Wprowadzono złe dane",Toast.LENGTH_LONG);
@@ -100,7 +113,8 @@ public class MainActivity extends AppCompatActivity {
         stoppopup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.dismiss();
+                //dodanie tego ze mozna przerwac wczesniej
+                dialog.dismiss(); //znika okno
             }
         });
 
