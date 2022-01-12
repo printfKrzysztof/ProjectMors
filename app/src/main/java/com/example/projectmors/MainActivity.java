@@ -9,8 +9,13 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,7 +33,31 @@ public class MainActivity extends AppCompatActivity {
 
         EditText tekst = findViewById(R.id.I_Tekst);
         EditText mors = findViewById(R.id.I_Mors);
+        Switch zmiana = findViewById(R.id.switch1);
 
+        zmiana.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                TextView tekst1 = findViewById(R.id.I_tekst1);
+                TextView tekst2 = findViewById(R.id.I_text2);
+                if(isChecked){
+
+                    tekst1.setText("Kod Morsa");
+                    tekst2.setText("Tekst");
+                    Editable tymczasowa = tekst.getText();
+                    tekst.setText(mors.getText());
+                    mors.setText(tymczasowa);
+                }
+                else
+                {
+                    tekst2.setText("Kod Morsa");
+                    tekst1.setText("Tekst");
+                    Editable tymczasowa = tekst.getText();
+                    tekst.setText(mors.getText());
+                    mors.setText(tymczasowa);
+                }
+            }
+        });
         //Tekst --> Kod
         tekst.addTextChangedListener(new TextWatcher() {
 
@@ -44,33 +73,19 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
                 String wpisane = tekst.getText().toString();
-                String przetlumaczenie = tlumaczenie(wpisane);
+                String przetlumaczenie;
+                if(zmiana.isChecked()) {
+                    przetlumaczenie = tlumaczenie(wpisane);
+                }
+                else
+                {
+                    przetlumaczenie = tlumaczeniewdrugostrone(wpisane);
+                }
                 mors.setText(przetlumaczenie);
 
-
             }
         });
 
-        //Kod --> Jezyk
-        mors.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void afterTextChanged(Editable s) {}
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-                String wpisane = mors.getText().toString();
-                String przetlumaczenie = tlumaczeniewdrugostrone(wpisane);
-                tekst.setText(przetlumaczenie);
-
-            }
-        });
     }
 
 
@@ -96,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         //Toast chmurka;
         //chmurka = Toast.makeText(this,"Wprowadzono złe dane",Toast.LENGTH_LONG);
         //chmurka.show();
-        return wpisane;
+        return "wpisanexD";
     }
 
     public void createNewDialog()

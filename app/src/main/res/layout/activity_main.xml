@@ -8,8 +8,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="362dp"
-        android:layout_height="638dp"
+        android:layout_width="355dp"
+        android:layout_height="437dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
@@ -21,10 +21,11 @@
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.048">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/I_tekst1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -36,7 +37,7 @@
         <EditText
             android:id="@+id/I_Tekst"
             android:layout_width="match_parent"
-            android:layout_height="99dp"
+            android:layout_height="87dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="16dp"
             android:layout_marginRight="10dp"
@@ -46,7 +47,7 @@
             android:typeface="normal" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/I_text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -85,10 +86,22 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="40dp"
         android:onClick="OnClick"
         android:text="@string/Latarka"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout" />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="112dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="16dp"
+        android:minHeight="48dp"
+        android:text="Kod->Text"
+
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="@+id/button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
