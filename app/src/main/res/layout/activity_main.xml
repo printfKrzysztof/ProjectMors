@@ -83,7 +83,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/I_przycisk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
@@ -101,7 +101,7 @@
         android:minHeight="48dp"
         android:text="Kod->Text"
 
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="@+id/button" />
+        app:layout_constraintBottom_toTopOf="@+id/I_przycisk"
+        app:layout_constraintEnd_toEndOf="@+id/I_przycisk" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

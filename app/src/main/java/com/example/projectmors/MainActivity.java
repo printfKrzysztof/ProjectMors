@@ -28,19 +28,17 @@ public class MainActivity extends AppCompatActivity {
     private CameraManager mFLASHManager;
     private String FLASHId;
 
-    private AlertDialog.Builder dialogBuilder;
-    private AlertDialog dialog;
-    private Button stoppopup;
+    public int error = 0;
 
     public String[] Litery = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
             "n", "o", "p", "r", "s", "t", "u", "w", "y", "z", "x", "q", "ą", "ć", "ę", "ł",
             "ń", "ó", "ś", "ż", "ź", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", " ",
             ".", ",", "'", "_", ":", ";", "?", "!", "-", "+", "/", "(", ")", "=", "@", "v"};
 
-    public String[] Mors = {".", "...", "..", "..", ".", "...", ".", "....", "..", "._", ".", "...", "__",
-            ".", "", "..", "..", "...", "", "..", ".", "_.", "..", "..", ".", "..", "...", "....", "...",
-            ".", ".", "......", "...", "__..", "._", "..", "...", "....", ".....", "....", "...", "..", "__.", "__", "/",
-            "...", "..", ".__.", "...", "...", "...", "....", "..", "....", "...", "...", "_..", ".__.", "...", "._..", "..._"};
+    public String[] Mors = {"._", "_...", "_._.", "_..", ".", ".._.", "__.", "....", "..", ".___", "_._", "._..", "__",
+            "_.", "___", ".__.", "._.", "...", "_", ".._", ".__", "_.__", "__..", "_.._", "__._", "._._", "_._..", ".._..", "._.._",
+            "__.__", "___.", "..._...", "__.._.", "__.._", ".____", "..___", "...__", "...._", ".....", "_....", "__...", "___..", "____.", "_____", "/",
+            "._._._", "__..__", ".____.", "..__._", "___...", "_._._.", "..__..", "_._.__", "_...._", "._._.", "_.._.", "_.__.", "_.__._", "_..._", ".__._.", "..._"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         EditText tekst = findViewById(R.id.I_Tekst);
         EditText mors = findViewById(R.id.I_Mors);
         Switch zmiana = findViewById(R.id.switch1);
-
         zmiana.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -63,15 +60,13 @@ public class MainActivity extends AppCompatActivity {
 
                     tekst1.setText("Kod Morsa");
                     tekst2.setText("Tekst");
-                    Editable tymczasowa = tekst.getText();
-                    tekst.setText(mors.getText());
-                    mors.setText(tymczasowa);
+
+                    tekst.setText(" ");
+                    mors.setText(" ");
                 } else {
                     tekst2.setText("Kod Morsa");
                     tekst1.setText("Tekst");
-                    Editable tymczasowa = tekst.getText();
-                    tekst.setText(mors.getText());
-                    mors.setText(tymczasowa);
+                    tekst.setText("Tutaj wpisz tekst");
                 }
             }
         });
@@ -108,14 +103,19 @@ public class MainActivity extends AppCompatActivity {
     public void OnClick(View adoz) {
 
         boolean FLASHYES = getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
-        if (!FLASHYES) {
-            Flasherror();
-        } else {
-            //Pobierasz tekst i na lampkę
-            //String kodmorsa = mors.getText().toString();
-            Niechsieswieci();
-            createNewDialog();
-        }
+
+
+            if (!FLASHYES) {
+                Flasherror();
+            }
+            else
+                {
+                //Pobierasz tekst i na lampkę
+                //String kodmorsa = mors.getText().toString();
+                    Niechsieswieci();
+
+                }
+
 
 
     }
@@ -138,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
 
     /* Funkacja odpowiedzialna za tlumaczenie*/
     public String tlumaczenie(String wpisane) {
+
         wpisane = wpisane.toLowerCase();
         String Tabela[] = wpisane.split("");
 
@@ -145,51 +146,80 @@ public class MainActivity extends AppCompatActivity {
 
         for (int i = 0; Tabela.length > i; i++) {
 
-            int a = 0;
+            int x = 0;
 
             for (int j = 0; j < Litery.length; j++) {
 
-                String ku = Tabela[i];
-                String ba = Litery[j];
-                if (ku.equals(ba)) {
+                String a = Tabela[i];
+                String b = Litery[j];
+                if (a.equals(b)) {
                     wpisane = wpisane + Mors[j];
+                    x=1;
                 }
 
+            }
+            if (x==0 && error==0)
+            {
+                AlertDialog info = new AlertDialog.Builder(this).create();
+                info.setTitle("NIEDOPUSZCZALNY ZNAK");
+                info.setMessage("Pole jest puste lub wprowadzono nieprawidłowy znak");
+
+                info.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        info.dismiss();
+                        error=0;
+                    }
+                });
+                info.show();
+                error=1;
             }
 
 
         }
-        //Toast chmurka;
-        //chmurka = Toast.makeText(this,"Wprowadzono złe dane",Toast.LENGTH_LONG);
-        //chmurka.show();
         return wpisane;
     }
 
     public String tlumaczeniewdrugostrone(String wpisane) {
-        wpisane = "Z morsa na litery";
+
+        String TabelaMors[]= wpisane.split(" ");
+        wpisane = "";
+
+        for (int i = 0; TabelaMors.length > i; i++) {
+
+            int x = 0;
+
+            for (int j = 0; j < Mors.length; j++) {
+
+                String a = TabelaMors[i];
+                String b = Mors[j];
+                if (a.equals(b)) {
+                    wpisane = wpisane + Litery[j];
+                    x=1;
+                }
+
+            }
+            if (x==0 && error==0)
+            {
+                AlertDialog info = new AlertDialog.Builder(this).create();
+                info.setTitle("NIEDOPUSZCZALNY ZNAK");
+                info.setMessage("Pole jest puste lub wprowadzono nieprawidłowy znak");
+
+                info.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        info.dismiss();
+                        error=0;
+                    }
+                });
+                info.show();
+                error=1;
+            }
+
+
+        }
         return wpisane;
     }
 
-    public void createNewDialog() {
-        dialogBuilder = new AlertDialog.Builder(this);
-        final View Popup = getLayoutInflater().inflate(R.layout.popup, null);
 
-        stoppopup = (Button) Popup.findViewById(R.id.stoper);
-
-        dialogBuilder.setView(Popup);
-        dialog = dialogBuilder.create();
-        dialog.show();
-
-        stoppopup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //dodanie tego ze mozna przerwac wczesniej
-                dialog.dismiss(); //znika okno
-            }
-        });
-
-
-    }
 
 
     public void Niechsieswieci() {
@@ -201,6 +231,7 @@ public class MainActivity extends AppCompatActivity {
         }
         EditText lat = findViewById(R.id.I_Mors);
         String LIGHT[] = lat.getText().toString().split("");
+
 
 
         for (int i = 0; LIGHT.length > i; i++) {
@@ -223,7 +254,7 @@ public class MainActivity extends AppCompatActivity {
             }else if ( LIGHT[i].equals("_"))
             {
                 try {
-                    TimeUnit.SECONDS.sleep(3);
+                    TimeUnit.SECONDS.sleep(2);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -231,18 +262,24 @@ public class MainActivity extends AppCompatActivity {
             }else if( LIGHT[i].equals("/"))
             {
                 try {
-                    TimeUnit.SECONDS.sleep(7);
+
+                    mFLASHManager.setTorchMode(FLASHId, false); //włączenie latarki
+                } catch (CameraAccessException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    TimeUnit.SECONDS.sleep(4);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
 
             }else
-                {
-                try {
-                    TimeUnit.SECONDS.sleep(1);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+            {
+                Toast chmurka;
+                chmurka = Toast.makeText(this,"Nadawanie nie powiodlo sie",Toast.LENGTH_LONG);
+                chmurka.show();
+                break;
+
             }
 
             try {
@@ -252,14 +289,16 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
 
 
 
+
+        }
+        try {
+
+            mFLASHManager.setTorchMode(FLASHId, false); //włączenie latarki
+        } catch (CameraAccessException e) {
+            e.printStackTrace();
         }
     }
 }
