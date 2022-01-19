@@ -33,12 +33,12 @@ public class MainActivity extends AppCompatActivity {
     public String[] Litery = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
             "n", "o", "p", "r", "s", "t", "u", "w", "y", "z", "x", "q", "ą", "ć", "ę", "ł",
             "ń", "ó", "ś", "ż", "ź", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", " ",
-            ".", ",", "'", "_", ":", ";", "?", "!", "-", "+", "/", "(", ")", "=", "@", "v"};
+            ".", ",", "'", "_", ":", ";", "?", "!", "-", "+", "/", "(", ")", "=", "@", "v",""};
 
     public String[] Mors = {"._", "_...", "_._.", "_..", ".", ".._.", "__.", "....", "..", ".___", "_._", "._..", "__",
             "_.", "___", ".__.", "._.", "...", "_", ".._", ".__", "_.__", "__..", "_.._", "__._", "._._", "_._..", ".._..", "._.._",
             "__.__", "___.", "..._...", "__.._.", "__.._", ".____", "..___", "...__", "...._", ".....", "_....", "__...", "___..", "____.", "_____", "/",
-            "._._._", "__..__", ".____.", "..__._", "___...", "_._._.", "..__..", "_._.__", "_...._", "._._.", "_.._.", "_.__.", "_.__._", "_..._", ".__._.", "..._"};
+            "._._._", "__..__", ".____.", "..__._", "___...", "_._._.", "..__..", "_._.__", "_...._", "._._.", "_.._.", "_.__.", "_.__._", "_..._", ".__._.", "..._",""};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
                 String przetlumaczenie;
                 if (zmiana.isChecked()) {
                     przetlumaczenie = tlumaczeniewdrugostrone(wpisane);
+
                 } else {
                     przetlumaczenie = tlumaczenie(wpisane);
                 }
@@ -99,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    //Część kodu odpowiedzialna za lampkę
     public void OnClick(View adoz) {
 
         boolean FLASHYES = getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
@@ -231,7 +232,6 @@ public class MainActivity extends AppCompatActivity {
         }
         EditText lat = findViewById(R.id.I_Mors);
         String LIGHT[] = lat.getText().toString().split("");
-
 
 
         for (int i = 0; LIGHT.length > i; i++) {
