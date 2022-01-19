@@ -1,5 +1,6 @@
 package com.example.projectmors;
 
+//Importy
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
@@ -27,9 +28,9 @@ public class MainActivity extends AppCompatActivity {
 
     private CameraManager mFLASHManager;
     private String FLASHId;
-
     public int error = 0;
 
+    //Tablice do tłumaczenia
     public String[] Litery = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
             "n", "o", "p", "r", "s", "t", "u", "w", "y", "z", "x", "q", "ą", "ć", "ę", "ł",
             "ń", "ó", "ś", "ż", "ź", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", " ",
@@ -45,12 +46,14 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //Tylko orientacja pozioma
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         EditText tekst = findViewById(R.id.I_Tekst);
         EditText mors = findViewById(R.id.I_Mors);
         Switch zmiana = findViewById(R.id.switch1);
+
+        //Nasłuchiwanie zmian przycisku
         zmiana.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -61,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
                     tekst1.setText("Kod Morsa");
                     tekst2.setText("Tekst");
 
-                    tekst.setText(" ");
-                    mors.setText(" ");
+                    tekst.setText("... ___ ... ");
+                    mors.setText("sos ");
                 } else {
                     tekst2.setText("Kod Morsa");
                     tekst1.setText("Tekst");
@@ -70,7 +73,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        //Tekst --> Kod
+
+        //Nasłuchiwanie zmian tekstu
         tekst.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -100,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    //Część kodu odpowiedzialna za lampkę
+    //Część kodu odpowiedzialna za włączanie lampki
     public void OnClick(View adoz) {
 
         boolean FLASHYES = getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
@@ -111,16 +115,15 @@ public class MainActivity extends AppCompatActivity {
             }
             else
                 {
-                //Pobierasz tekst i na lampkę
-                //String kodmorsa = mors.getText().toString();
+                    //Kod odpowiedzialny za świecenie
                     Niechsieswieci();
-
                 }
 
 
 
     }
 
+    //Flash - error (czyli nie mamy błysku w telefonie)
     private void Flasherror() {
         AlertDialog info = new AlertDialog.Builder(this).create();
         info.setTitle(">>>ERROR<<<");
@@ -132,12 +135,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         info.show();
-        //Toast chmurka;
-        //chmurka = Toast.makeText(this,"Wprowadzono złe dane",Toast.LENGTH_LONG);
-        //chmurka.show();
     }
 
-    /* Funkacja odpowiedzialna za tlumaczenie*/
+    //Tekst --> Kod
     public String tlumaczenie(String wpisane) {
 
         wpisane = wpisane.toLowerCase();
@@ -159,11 +159,12 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             }
+            //Obsługa błedu
             if (x==0 && error==0)
             {
                 AlertDialog info = new AlertDialog.Builder(this).create();
                 info.setTitle("NIEDOPUSZCZALNY ZNAK");
-                info.setMessage("Pole jest puste lub wprowadzono nieprawidłowy znak");
+                info.setMessage("W polu znajduje się nieprawidłowy znak");
 
                 info.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -180,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
         return wpisane;
     }
 
+    //Kod --> Tekst
     public String tlumaczeniewdrugostrone(String wpisane) {
 
         String TabelaMors[]= wpisane.split(" ");
@@ -199,11 +201,12 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             }
+            //Obsługa błedu
             if (x==0 && error==0)
             {
                 AlertDialog info = new AlertDialog.Builder(this).create();
                 info.setTitle("NIEDOPUSZCZALNY ZNAK");
-                info.setMessage("Pole jest puste lub wprowadzono nieprawidłowy znak");
+                info.setMessage("W polu znajduje się nieprawidłowy znak");
 
                 info.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -222,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
+    //Funkcja obsługująca latarkę
     public void Niechsieswieci() {
         mFLASHManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
         try {
@@ -288,9 +291,6 @@ public class MainActivity extends AppCompatActivity {
             } catch (CameraAccessException e) {
                 e.printStackTrace();
             }
-
-
-
 
 
         }
