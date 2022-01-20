@@ -3,6 +3,7 @@ package com.example.projectmors;
 //Importy
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraManager;
@@ -29,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     private CameraManager mFLASHManager;
     private String FLASHId;
     public int error = 0;
-
     //Tablice do tłumaczenia
     public String[] Litery = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
             "n", "o", "p", "r", "s", "t", "u", "w", "y", "z", "x", "q", "ą", "ć", "ę", "ł",
@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
             "_.", "___", ".__.", "._.", "...", "_", ".._", ".__", "_.__", "__..", "_.._", "__._", "._._", "_._..", ".._..", "._.._",
             "__.__", "___.", "..._...", "__.._.", "__.._", ".____", "..___", "...__", "...._", ".....", "_....", "__...", "___..", "____.", "_____", "/",
             "._._._", "__..__", ".____.", "..__._", "___...", "_._._.", "..__..", "_._.__", "_...._", "._._.", "_.._.", "_.__.", "_.__._", "_..._", ".__._.", "..._",""};
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
     public String tlumaczenie(String wpisane) {
 
         wpisane = wpisane.toLowerCase();
-        String Tabela[] = wpisane.split("");
+        String[] Tabela = wpisane.split("");
 
         wpisane = "";
 
@@ -184,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
     //Kod --> Tekst
     public String tlumaczeniewdrugostrone(String wpisane) {
 
-        String TabelaMors[]= wpisane.split(" ");
+        String[] TabelaMors = wpisane.split(" ");
         wpisane = "";
 
         for (int i = 0; TabelaMors.length > i; i++) {
@@ -234,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         EditText lat = findViewById(R.id.I_Mors);
-        String LIGHT[] = lat.getText().toString().split("");
+        String[] LIGHT = lat.getText().toString().split("");
 
 
         for (int i = 0; LIGHT.length > i; i++) {
@@ -301,4 +303,12 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+    //Podpowiedź dla użytkownika
+    public void Podpowiedz(View adoz){
+        Intent intent = new Intent(this, PodpowiedzActivity.class);
+        startActivity(intent);
+
+    }
+
 }

@@ -7,4 +7,9 @@
     <string name="Mors">Tu wpisuj kod Morsa</string>
     <string name="Latarka">Nadawaj</string>
     <string name="zakoncz">Zakończ</string>
+    <string name="podpowiedz">Podpowiedźi kod Morsa \n
+    \n - krótki sygnał . \n
+    \n - sygnał długi _ \n
+    \n - oddzielanie liter *spacja* \n
+    \n - nowe słowo /</string>
 </resources>

@@ -32,7 +32,7 @@
             android:layout_marginTop="16dp"
             android:text="@string/Zdanie"
             android:textColor="#000000"
-            android:textSize="20sp" />
+            android:textSize="34sp" />
 
         <EditText
             android:id="@+id/I_Tekst"
@@ -44,6 +44,7 @@
             android:ems="10"
             android:inputType="textLongMessage|textPersonName"
             android:text="@string/TekstPl"
+            android:textSize="24sp"
             android:typeface="normal" />
 
         <TextView
@@ -54,7 +55,7 @@
             android:layout_marginTop="24dp"
             android:text="@string/kod"
             android:textColor="#000000"
-            android:textSize="20sp" />
+            android:textSize="34sp" />
 
         <EditText
             android:id="@+id/I_Mors"
@@ -66,6 +67,7 @@
             android:ems="10"
             android:inputType="textLongMessage|textPersonName"
             android:text="@string/Mors"
+            android:textSize="24sp"
             android:typeface="normal" />
 
     </LinearLayout>
@@ -95,13 +97,26 @@
 
     <Switch
         android:id="@+id/switch1"
-        android:layout_width="112dp"
-        android:layout_height="50dp"
+        android:layout_width="142dp"
+        android:layout_height="53dp"
         android:layout_marginBottom="16dp"
         android:minHeight="48dp"
         android:text="Kod->Text"
 
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/I_przycisk"
         app:layout_constraintEnd_toEndOf="@+id/I_przycisk" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="8dp"
+        android:background="?android:attr/panelBackground"
+        android:onClick="Podpowiedz"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/I_przycisk"
+        app:srcCompat="@android:drawable/ic_menu_help" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
