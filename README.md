@@ -1,4 +1,4 @@
 # ProjectMors
 Translator of morse code 
-
-Wy musicie zmienić funkcje tłumacz tak aby faktycznie to działało. Powodzenia
+## About  
+Created as an project for mobile-application classes. Simple morse-code translator with flashlight mode. Based on empty activity in Android Studio.
